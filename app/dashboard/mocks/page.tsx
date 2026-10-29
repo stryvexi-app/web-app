@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {useSpeechRecognition,} from "react-speech-recognition";
 /*@ts-ignore*/
 import "./mocks.css";
+import LoadingAnimation from "@/app/components/LoadingAnimation";
 
 type InterviewSession = {
   id: string;
@@ -549,26 +550,7 @@ async function submitAnswer() {
               )}
 
               {historyLoading ? (
-  <div
-    className="mock-loading-screen"
-    role="status"
-    aria-live="polite"
-  >
-    <div className="mock-loader">
-      <span className="mock-loader-ring" />
-      <span className="mock-loader-center">S</span>
-    </div>
-
-    <h3>Bringing your interview journey together</h3>
-
-    <p>
-      Every practice session brings you closer to your next opportunity.
-    </p>
-
-    <div className="mock-loading-track">
-      <span />
-    </div>
-  </div>
+  <LoadingAnimation />
 ) : history.length === 0 ? (
                 <div className="mock-history-empty">
                   <span className="mock-history-empty-icon">✦</span>

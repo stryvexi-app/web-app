@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import LoadingAnimation from "@/app/components/LoadingAnimation";
 
 type User = {
   id?: string;
@@ -96,22 +97,7 @@ export default function DashboardPage() {
 
 if (loading) {
   return (
-    <main
-      className="sp-page sp-loading"
-      role="status"
-      aria-live="polite"
-    >
-      <div className="sp-loader">
-        <span className="sp-loader-ring" />
-        <span className="sp-loader-center">S</span>
-      </div>
-
-      <h2>Preparing your next move</h2>
-<p>Your career journey starts with one step. Let’s make it count.</p>
-      <div className="sp-loading-track">
-        <span />
-      </div>
-    </main>
+    <LoadingAnimation />
   );
 }
 

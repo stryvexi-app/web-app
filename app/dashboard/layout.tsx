@@ -171,7 +171,7 @@ export default function DashboardLayout({
         <header className="stry-topbar">
           <div>
             <div className="stry-breadcrumb">
-              YOUR WORKSPACE / {currentPage.label.toUpperCase()}
+              STRYVEXI WORKSPACE / {currentPage.label.toUpperCase()}
             </div>
             <div className="stry-topbar-subtitle">
               Your career, in focus.

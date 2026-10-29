@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 /* @ts-ignore*/
 import "./progress.css";
+import LoadingAnimation from "@/app/components/LoadingAnimation";
 
 type User = {
   name?: string;
@@ -82,12 +83,7 @@ export default function MyProgressPage() {
   const displayRank = currentEntry?.rank ?? (period === "daily" ? stats.rank : undefined);
 
   if (loading) return (
-    <main className="sp-page sp-loading" role="status" aria-live="polite">
-      <div className="sp-loader"><span className="sp-loader-ring" /><span className="sp-loader-center">S</span></div>
-      <h2>Bringing your progress together</h2>
-      <p>Every step forward deserves to be seen.</p>
-      <div className="sp-loading-track"><span /></div>
-    </main>
+   <LoadingAnimation />
   );
 
   if (error && !daily) return (

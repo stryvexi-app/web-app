@@ -6,6 +6,7 @@ import Link from "next/link";
 import ProjectEditor from "./ProjectEditor";
 /*@ts-ignore*/
 import "./profile.css";
+import LoadingAnimation from "@/app/components/LoadingAnimation";
 
 type Experience = {
   id: string;
@@ -316,14 +317,11 @@ function removeProjectTechnology(id: string, technology: string) {
     }
   }
 
-  if (loading) {
-    return (
-      <main className="profile-loading">
-        <div className="profile-loader" />
-        <p>Loading your career profile...</p>
-      </main>
-    );
-  }
+ if (loading) {
+  return (
+   <LoadingAnimation />
+  );
+}
 
   return (
     <main className="career-profile-page">

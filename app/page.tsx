@@ -6,21 +6,29 @@ import LoginModal from "@/app/components/LoginModal";
 import SignupModal from "@/app/components/SignUpModal";
 const faqs = [
   {
-    q: "Who is Stryvexi for?",
-    a: "Stryvexi is being designed for fresh graduates, active job seekers, and working professionals planning their next move—with an initial focus on software, QA, and other IT roles."
+    q: "What is Stryvexi?",
+    a: "Stryvexi is a career preparation platform that helps you improve your resume, practise interviews, build your skills through daily challenges, and track your progress.",
   },
   {
-    q: "Will it guarantee me a job?",
-    a: "No platform can honestly guarantee a hiring outcome. Stryvexi helps you prepare with more clarity: understand role fit, practice relevant questions, and keep your search organised."
+    q: "Who can use Stryvexi?",
+    a: "Stryvexi is designed for fresh graduates, job seekers, and working professionals who want to improve their skills and prepare for their next career opportunity.",
   },
   {
-    q: "What will I be able to do first?",
-    a: "The first release is planned around resume-to-job matching, practical interview preparation, a focused action plan, and simple application tracking."
+    q: "How do I get started?",
+    a: "Create an account using the signup option. Once you sign in, open your dashboard to explore the available career tools and start preparing.",
   },
   {
-    q: "Is my resume kept private?",
-    a: "Privacy is part of the product plan. The service will explain how uploaded documents are processed, stored, and deleted before you use those features."
-  }
+    q: "Can Stryvexi guarantee me a job?",
+    a: "No platform can guarantee a job offer. Stryvexi provides tools to help you prepare, practise, identify areas for improvement, and work towards your career goals.",
+  },
+  {
+    q: "Is Stryvexi available to use now?",
+    a: "Yes. You can create an account and start using the features currently available in Stryvexi. Some tools or capabilities may vary as the platform continues to improve.",
+  },
+  {
+    q: "How do I access my account again?",
+    a: "Select Log in on the homepage and sign in using your registered credentials.",
+  },
 ];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -98,26 +106,7 @@ useEffect(() => {
 />
       <div className="announcement">
         <span className="announcement-dot" />
-        A more intentional job search is on the way
-        {isLoggedIn ? (
-  <button
-  type="button"
-  className="nav-cta"
-  onClick={() => router.push("/dashboard")}
->
-  Go to Dashboard <Arrow diagonal />
-</button>
-) : (
-  <a
-    href="#"
-    onClick={(event) => {
-      event.preventDefault();
-      setSignupOpen(true);
-    }}
-  >
-    Get Started <Arrow diagonal />
-  </a>
-)}
+           Your next career move starts with better preparation.
       </div>
 
       <header className="site-header">
@@ -153,18 +142,10 @@ useEffect(() => {
   <>
     <button
       type="button"
-      className="nav-login"
+      className="nav-cta"
       onClick={() => setLoginOpen(true)}
     >
-      Log in
-    </button>
-
-    <button
-      type="button"
-      className="nav-cta"
-      onClick={() => setSignupOpen(true)}
-    >
-      Get Started <Arrow diagonal />
+      Login <Arrow diagonal />
     </button>
   </>
 )}
@@ -174,46 +155,44 @@ useEffect(() => {
 
       <section className="hero">
        <div className="hero-copy">
-  <div className="eyebrow reveal">
-    <span className="eyebrow-line" />
-    YOUR NEXT CAREER MOVE STARTS HERE
-  </div>
+ <div className="eyebrow reveal">
+  <span className="eyebrow-line" />
+  YOUR NEXT CAREER MOVE STARTS HERE
+</div>
 
-  <h1 className="reveal reveal-delay-1">
-    Your next job
-    <em> won’t happen by chance.</em>
-    Prepare for it.
-  </h1>
+<h1 className="reveal reveal-delay-1">
+  Get ready for your next job.
+  <em> Show up with confidence.</em>
+</h1>
 
-  <p className="hero-description reveal reveal-delay-2">
-    Stryvexi helps you get ready for your next opportunity with smarter
-    resume insights, role-specific interview practice, and a clear plan
-    to move your career forward.
-  </p>
+<p className="hero-description reveal reveal-delay-2">
+  Build a stronger resume, practise for interviews, identify your skill
+  gaps, and track your career progress—all in one place with Stryvexi.
+</p>
 
-  <div className="hero-actions reveal reveal-delay-3">
-    {isLoggedIn ? (
-  <button
-  type="button"
-  className="nav-cta"
-  onClick={() => router.push("/dashboard")}
->
-  Go to Dashboard <Arrow diagonal />
-</button>
-) : (
-  <button
-    type="button"
-    className="button button-dark"
-    onClick={() => setSignupOpen(true)}
-  >
-    Get Started <Arrow diagonal />
-  </button>
-)}
+<div className="hero-actions reveal reveal-delay-3">
+  {isLoggedIn === true ? (
+    <button
+      type="button"
+      className="button button-dark"
+      onClick={() => router.push("/dashboard")}
+    >
+      Open My Dashboard <Arrow diagonal />
+    </button>
+  ) : (
+    <button
+      type="button"
+      className="button button-dark"
+      onClick={() => setSignupOpen(true)}
+    >
+      Create Your Free Account <Arrow diagonal />
+    </button>
+  )}
 
-    <a className="text-link" href="#how-it-works">
-      Discover how it works <Arrow />
-    </a>
-  </div>
+  <a className="text-link" href="#toolkit">
+    Explore Features <Arrow />
+  </a>
+</div>
 
   <div className="hero-proof reveal reveal-delay-3">
     <div className="proof-avatars" aria-hidden="true">
@@ -224,9 +203,11 @@ useEffect(() => {
     </div>
 
     <div>
-      <strong>Own your next move.</strong>
-      <small>Sharpen your resume · Practise interviews · Plan your next step</small>
-    </div>
+  <strong>Your goals. Your preparation. Your next move.</strong>
+  <small>
+    Resume insights · Mock interviews · Daily challenges · Career progress
+  </small>
+</div>
   </div>
 </div>
 
@@ -246,7 +227,7 @@ useEffect(() => {
             <div className="match-row">
               <div className="match-ring"><span>82<small>%</small></span></div>
               <div className="match-copy">
-                <strong>Your role match</strong>
+                <strong>ATS Score</strong>
                 <p>You’re closer than you think. Here’s where to focus next.</p>
               </div>
             </div>
@@ -295,12 +276,30 @@ useEffect(() => {
       <section className="intro section-pad" id="how-it-works">
         <div className="section-index">01 <span>— THE APPROACH</span></div>
         <div className="intro-content">
-          <p className="eyebrow">A LITTLE LESS OVERWHELMED</p>
-          <h2>Your career isn’t a guessing game.<br /><em>Your preparation shouldn’t be either.</em></h2>
-          <div className="intro-bottom">
-            <p>There’s a lot to juggle when you’re aiming for a new role. Stryvexi brings the important pieces together, so you can spend less time wondering what to do—and more time doing it.</p>
-            <a className="round-link" href="#toolkit" aria-label="Explore the toolkit"><Arrow diagonal /></a>
-          </div>
+         <p className="eyebrow">A CLEARER WAY TO PREPARE</p>
+
+<h2>
+  Your career isn’t a guessing game.
+  <br />
+  <em>Make your next move with a plan.</em>
+</h2>
+
+<div className="intro-bottom">
+  <p>
+    Preparing for a new role takes more than sending resumes.
+    Stryvexi brings career profile building, resume insights,
+    interview practice, and progress tracking together so you
+    know what to work on next.
+  </p>
+
+  <a
+    className="round-link"
+    href="#toolkit"
+    aria-label="Explore Stryvexi features"
+  >
+    <Arrow diagonal />
+  </a>
+</div>
         </div>
       </section>
 
@@ -378,10 +377,34 @@ useEffect(() => {
       <section className="manifesto">
         <div className="manifesto-grain" />
         <div className="manifesto-content">
-          <p className="eyebrow"><span className="eyebrow-line" /> THE STRYVEXI MINDSET</p>
-          <h2>You don’t need to have<br />it all figured out.<br /><em>You need a next step.</em></h2>
-          <p className="manifesto-copy">Progress isn’t always a big leap. Sometimes it’s a better answer, a stronger resume line, or showing up to practise one more time.</p>
-          <a className="button button-light" href="#waitlist">Start with your next step <Arrow diagonal /></a>
+          <p className="eyebrow">
+  <span className="eyebrow-line" /> YOUR NEXT CHAPTER STARTS NOW
+</p>
+
+<h2>
+  You don’t need
+  <br />
+  all the answers.
+  <br />
+  <em>You need a next step.</em>
+</h2>
+
+<p className="manifesto-copy">
+  Build confidence one step at a time. Improve your resume,
+  practise your interviews, and keep moving towards the role you want.
+  Your next move starts with what you do today.
+</p>
+
+<button
+  type="button"
+  className="button button-light"
+  onClick={() =>
+    isLoggedIn ? router.push("/dashboard") : setSignupOpen(true)
+  }
+>
+  {isLoggedIn ? "Go to My Dashboard" : "Get Started Today"}
+  <Arrow diagonal />
+</button>
         </div>
         <div className="manifesto-number">S<span>/</span>01</div>
         <div className="manifesto-sun" />
@@ -402,25 +425,55 @@ useEffect(() => {
         </div>
       </section>
 
-      <section className="waitlist section-pad" id="waitlist">
-        <div className="waitlist-sticker">YOUR<br />NEXT<br /><i>CHAPTER</i> <span>✳</span></div>
-        <div className="waitlist-copy">
-          <p className="eyebrow"><span className="eyebrow-line" /> BE FIRST IN LINE</p>
-          <h2>Good things happen<br />when you <em>get ready.</em></h2>
-          <p>We’re building a more focused way to prepare for your next role. Join the early list and be among the first to see what’s next.</p>
-          {submitted ? (
-            <div className="success-message" role="status"><span>✓</span><div><strong>You’re on the list.</strong><small>Thanks for your interest. We’ll share the next update with you.</small></div></div>
-          ) : (
-            <form className="waitlist-form" onSubmit={joinWaitlist}>
-              <label className="sr-only" htmlFor="waitlist-email">Your email address</label>
-              <input id="waitlist-email" type="email" placeholder="Your email address" value={email} onChange={(e) => setEmail(e.target.value)} required />
-              <button className="button button-dark" type="submit">Keep me posted <Arrow diagonal /></button>
-            </form>
-          )}
-          <small className="form-note">No noise. Just launch news and early access details.</small>
-        </div>
-        <div className="waitlist-side-note">OWN YOUR NEXT MOVE. <span>— STRYVEXI</span></div>
-      </section>
+      <section className="waitlist section-pad" id="get-started">
+  <div className="waitlist-sticker">
+    YOUR<br />NEXT<br /><i>CHAPTER</i> <span>✳</span>
+  </div>
+
+  <div className="waitlist-copy">
+    <p className="eyebrow">
+      <span className="eyebrow-line" /> YOUR CAREER JOURNEY STARTS HERE
+    </p>
+
+    <h2>
+      Your next opportunity.
+      <br />
+      <em>Start preparing today.</em>
+    </h2>
+
+    <p>
+      Create your Stryvexi account and start working on your career goals.
+      Explore resume insights, practise interviews, take daily challenges,
+      and follow your progress in one place.
+    </p>
+
+    <div className="hero-actions">
+      {isLoggedIn === true ? (
+        <button
+          type="button"
+          className="button button-dark"
+          onClick={() => router.push("/dashboard")}
+        >
+          Open My Dashboard <Arrow diagonal />
+        </button>
+      ) : (
+        <>
+          <button
+            type="button"
+            className="button button-dark"
+            onClick={() => setLoginOpen(true)}
+          >
+            Get Started Now <Arrow diagonal />
+          </button>
+        </>
+      )}
+    </div>
+  </div>
+
+  <div className="waitlist-side-note">
+    OWN YOUR NEXT MOVE. <span>— STRYVEXI</span>
+  </div>
+</section>
 
       <section className="faq section-pad" id="faq">
         <div className="section-index">04 <span>— GOOD QUESTIONS</span></div>

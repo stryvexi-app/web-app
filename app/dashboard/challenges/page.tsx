@@ -4,6 +4,7 @@ import Editor from "@monaco-editor/react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 /* @ts-ignore */
 import "./daily-challenges.css";
+import LoadingAnimation from "@/app/components/LoadingAnimation";
 
 type Difficulty = "Easy" | "Medium" | "Hard";
 type Challenge = {
@@ -137,29 +138,7 @@ export default function DailyChallengesPage() {
         {error && <div className="dc-error" role="alert">{error} {error.toLowerCase().includes("authentication") || error.toLowerCase().includes("log in") ? <a href="/login">Log in</a> : null}</div>}
         {message && <div className="dc-success" role="status">{message}</div>}
        {loading ? (
-  <div className="dc-loading-screen" role="status" aria-live="polite">
-    <div className="dc-loader">
-      <div className="dc-loader-ring dc-loader-ring-outer" />
-      <div className="dc-loader-ring dc-loader-ring-inner" />
-      <div className="dc-loader-core">
-        <span> S </span>
-      </div>
-    </div>
-
-    <h2 className="dc-loading-title">Preparing your challenges</h2>
-
-    <p className="dc-loading-subtitle">
-      Sharpen your skills. Build your streak. Own your next move.
-    </p>
-
-    <div className="dc-loading-progress">
-      <span />
-    </div>
-
-    <span className="dc-loading-caption">
-      GETTING YOUR DAILY PRACTICE READY
-    </span>
-  </div>
+  <LoadingAnimation />
 ) : (
           <div className="dc-grid">
             <aside className="dc-card dc-list">
