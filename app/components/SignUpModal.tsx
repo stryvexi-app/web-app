@@ -2,6 +2,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 type SignupModalProps = {
   open: boolean;
@@ -16,6 +17,7 @@ export default function SignupModal({ open, onClose }: SignupModalProps) {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+const router = useRouter();
 
   const [form, setForm] = useState({
     name: "",
@@ -167,8 +169,11 @@ export default function SignupModal({ open, onClose }: SignupModalProps) {
       throw new Error(data.message || "Unable to create your account.");
     }
 
-    setStep("success");
-    setNotice("Your account has been created successfully.");
+   setStep("success");
+setNotice("Your account has been created successfully.");
+
+router.push("/dashboard");
+router.refresh();
   }
 
   async function resendOtp() {

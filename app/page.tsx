@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import LoginModal from "@/app/components/LoginModal";
 import SignupModal from "@/app/components/SignUpModal";
 const faqs = [
   {
@@ -40,7 +42,39 @@ export default function Home() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
   const [signupOpen, setSignupOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const router = useRouter();
+useEffect(() => {
+  let cancelled = false;
+
+  async function checkAuth() {
+    try {
+      const response = await fetch("/api/auth/me", {
+        method: "GET",
+        credentials: "include",
+        cache: "no-store",
+      });
+
+      const data = response.ok ? await response.json() : null;
+
+      if (!cancelled) {
+        setIsLoggedIn(
+          response.ok && Boolean(data?.user)
+        );
+      }
+    } catch {
+      if (!cancelled) setIsLoggedIn(false);
+    }
+  }
+
+  checkAuth();
+
+  return () => {
+    cancelled = true;
+  };
+}, []);
 
   function joinWaitlist(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -50,6 +84,14 @@ export default function Home() {
 
   return (
     <main>
+      <LoginModal
+  open={loginOpen}
+  onClose={() => setLoginOpen(false)}
+  onSwitchToSignup={() => {
+    setLoginOpen(false);
+    setSignupOpen(true);
+  }}
+/>
       <SignupModal
   open={signupOpen}
   onClose={() => setSignupOpen(false)}
@@ -57,13 +99,31 @@ export default function Home() {
       <div className="announcement">
         <span className="announcement-dot" />
         A more intentional job search is on the way
-        <a  onClick={() => setSignupOpen(true)}>Get Started <Arrow diagonal /></a>
+        {isLoggedIn ? (
+  <button
+  type="button"
+  className="nav-cta"
+  onClick={() => router.push("/dashboard")}
+>
+  Go to Dashboard <Arrow diagonal />
+</button>
+) : (
+  <a
+    href="#"
+    onClick={(event) => {
+      event.preventDefault();
+      setSignupOpen(true);
+    }}
+  >
+    Get Started <Arrow diagonal />
+  </a>
+)}
       </div>
 
       <header className="site-header">
         <a href="#" className="brand" aria-label="Stryvexi home">
           <BrandMark />
-          <span>stryvexi<span className="brand-period">.</span></span>
+          <span>STRYVEXI<span className="brand-period">.</span></span>
         </a>
 
         <button
@@ -80,7 +140,35 @@ export default function Home() {
           <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a>
           <a href="#toolkit" onClick={() => setMenuOpen(false)}>The toolkit</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>FAQs</a>
-          <a className="nav-cta"  onClick={() => setSignupOpen(true)}>Get Started <Arrow diagonal /></a>
+           
+{isLoggedIn ? (
+  <button
+  type="button"
+  className="nav-cta"
+  onClick={() => router.push("/dashboard")}
+>
+  Go to Dashboard <Arrow diagonal />
+</button>
+) : (
+  <>
+    <button
+      type="button"
+      className="nav-login"
+      onClick={() => setLoginOpen(true)}
+    >
+      Log in
+    </button>
+
+    <button
+      type="button"
+      className="nav-cta"
+      onClick={() => setSignupOpen(true)}
+    >
+      Get Started <Arrow diagonal />
+    </button>
+  </>
+)}
+
         </nav>
       </header>
 
@@ -104,9 +192,23 @@ export default function Home() {
   </p>
 
   <div className="hero-actions reveal reveal-delay-3">
-    <a className="button button-dark"   onClick={() => setSignupOpen(true)}>
-      Get Started <Arrow diagonal />
-    </a>
+    {isLoggedIn ? (
+  <button
+  type="button"
+  className="nav-cta"
+  onClick={() => router.push("/dashboard")}
+>
+  Go to Dashboard <Arrow diagonal />
+</button>
+) : (
+  <button
+    type="button"
+    className="button button-dark"
+    onClick={() => setSignupOpen(true)}
+  >
+    Get Started <Arrow diagonal />
+  </button>
+)}
 
     <a className="text-link" href="#how-it-works">
       Discover how it works <Arrow />
