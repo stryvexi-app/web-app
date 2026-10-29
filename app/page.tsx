@@ -494,7 +494,7 @@ useEffect(() => {
 
       <footer className="site-footer">
         <div className="footer-top">
-          <a href="#" className="brand brand-footer"><BrandMark /><span>stryvexi<span className="brand-period">.</span></span></a>
+          <a href="#" className="brand brand-footer"><BrandMark /><span>STRYVEXI<span className="brand-period">.</span></span></a>
           <p>Own your next move.</p>
           <a className="footer-back-top" href="#">BACK TO TOP ↑</a>
         </div>
