@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 /* @ts-ignore */
 import "./globals.css";
 
-const siteUrl = "https://your-domain.com";
+const siteUrl = "https://www.stryvexi.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
