@@ -131,7 +131,7 @@ export default function DailyChallengesPage() {
               <button className={`dc-period ${leaderboardPeriod === "allTime" ? "active" : ""}`} onClick={() => setLeaderboardPeriod("allTime")}>All time</button>
             </div>
           </div>
-          {(() => { const entries = data?.leaderboards?.[leaderboardPeriod] || []; return entries.length ? entries.map((entry, index) => <div key={entry.userId} className={`dc-lb-row ${entry.isCurrentUser ? "dc-lb-you" : ""}`}><div className="dc-lb-rank">{entry.isCurrentUser && !entry.rank ? "YOU" : entry.rank || index + 1}</div><div><div className="dc-lb-name">{entry.displayName}{entry.isCurrentUser ? " · You" : ""}</div><div className="dc-lb-meta">🔥 {entry.streak || 0} day streak</div></div><div className="dc-lb-xp">{entry.xp} XP</div></div>) : <div className="dc-lb-empty">You're early! Complete your first challenge review to start the rankings.</div>; })()}
+          {(() => { const entries = data?.leaderboards?.[leaderboardPeriod] || []; return entries.length ? entries?.map((entry, index) => <div key={entry.userId} className={`dc-lb-row ${entry.isCurrentUser ? "dc-lb-you" : ""}`}><div className="dc-lb-rank">{entry.isCurrentUser && !entry.rank ? "YOU" : entry.rank || index + 1}</div><div><div className="dc-lb-name">{entry.displayName}{entry.isCurrentUser ? " · You" : ""}</div><div className="dc-lb-meta">🔥 {entry.streak || 0} day streak</div></div><div className="dc-lb-xp">{entry.xp} XP</div></div>) : <div className="dc-lb-empty">You're early! Complete your first challenge review to start the rankings.</div>; })()}
         </section>
 
         {error && <div className="dc-error" role="alert">{error} {error.toLowerCase().includes("authentication") || error.toLowerCase().includes("log in") ? <a href="/login">Log in</a> : null}</div>}
@@ -165,7 +165,7 @@ export default function DailyChallengesPage() {
             <aside className="dc-card dc-list">
               <h2>Today&apos;s challenges</h2>
               <p className="dc-muted dc-small" style={{ marginTop: -4 }}>Complete each level at your own pace.</p>
-              {DIFFICULTIES.map((difficulty) => {
+              {DIFFICULTIES?.map((difficulty) => {
                 const item = challenges.find((challenge) => challenge.difficulty === difficulty);
                 if (!item) return null;
                 const state = progress[item.id];
@@ -188,13 +188,13 @@ export default function DailyChallengesPage() {
               <div className="dc-content">
                 <div className="dc-problem">
                   <h2>Examples</h2>
-                  {selected.examples.map((example, index) => <div className="dc-example" key={index}>
+                  {selected.examples?.map((example, index) => <div className="dc-example" key={index}>
                     <div className="dc-muted dc-small">Example {index + 1}</div><p><strong>Input</strong></p><code>{example.input}</code>
                     <p><strong>Output</strong></p><code>{example.output}</code>{example.explanation && <p className="dc-muted dc-small">{example.explanation}</p>}
                   </div>)}
-                  <h2 style={{ marginTop: 20 }}>Constraints</h2><ul>{selected.constraints.map((item) => <li key={item}>{item}</li>)}</ul>
+                  <h2 style={{ marginTop: 20 }}>Constraints</h2><ul>{selected.constraints?.map((item) => <li key={item}>{item}</li>)}</ul>
                   <button className="dc-btn" onClick={() => setShowHints((v) => !v)}>{showHints ? "Hide hints" : "Show hints"}</button>
-                  {showHints && <ul className="dc-hints">{selected.hints.map((hint) => <li key={hint}>{hint}</li>)}</ul>}
+                  {showHints && <ul className="dc-hints">{selected.hints?.map((hint) => <li key={hint}>{hint}</li>)}</ul>}
                 </div>
                 <div className="dc-editor">
                   <div className="dc-editor-head"><div><strong>Solution editor</strong><div className="dc-muted dc-small">JavaScript · Monaco Editor</div></div><span className="dc-tag">Draft autosave</span></div>
@@ -207,9 +207,9 @@ export default function DailyChallengesPage() {
                   {selectedProgress?.lastReview && <div className="dc-result">
                     <h3>AI code review & test simulation</h3><p>{selectedProgress.lastReview.summary}</p>
                     <p className="dc-muted dc-small">AI assessment: {selectedProgress.lastReview.overallAssessment || "review complete"} · Confidence: {selectedProgress.lastReview.confidence || "not provided"} · Code execution: not performed · {new Date(selectedProgress.lastReview.reviewedAt).toLocaleString()}</p>
-                    {selectedProgress.lastReview.testResults?.length ? <><strong>Predicted test-case results</strong><p className="dc-muted dc-small">These are AI predictions, not real test runs. Test inputs are kept on the server; this view shows case labels and predicted outcomes.</p><div>{selectedProgress.lastReview.testResults.map((test, index) => <div className="dc-example" key={`${test.name}-${index}`}><div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}><strong>{test.name}</strong><span className="dc-tag">{test.verdict.replace("_", " ")}</span></div><p className="dc-muted dc-small">Expected: <code>{test.expectedOutput}</code></p><p className="dc-muted dc-small">AI-predicted: <code>{test.predictedOutput}</code></p><p>{test.explanation}</p></div>)}</div></> : null}
-                    <strong>What looks good</strong><ul>{selectedProgress.lastReview.strengths.map((item, index) => <li key={index}>{item}</li>)}</ul>
-                    <strong>Improvements to consider</strong><ul>{selectedProgress.lastReview.improvements.map((item, index) => <li key={index}>{item}</li>)}</ul>
+                    {selectedProgress.lastReview.testResults?.length ? <><strong>Predicted test-case results</strong><p className="dc-muted dc-small">These are AI predictions, not real test runs. Test inputs are kept on the server; this view shows case labels and predicted outcomes.</p><div>{selectedProgress.lastReview.testResults?.map((test, index) => <div className="dc-example" key={`${test.name}-${index}`}><div style={{ display: "flex", justifyContent: "space-between", gap: 8, flexWrap: "wrap" }}><strong>{test.name}</strong><span className="dc-tag">{test.verdict.replace("_", " ")}</span></div><p className="dc-muted dc-small">Expected: <code>{test.expectedOutput}</code></p><p className="dc-muted dc-small">AI-predicted: <code>{test.predictedOutput}</code></p><p>{test.explanation}</p></div>)}</div></> : null}
+                    <strong>What looks good</strong><ul>{selectedProgress.lastReview.strengths?.map((item, index) => <li key={index}>{item}</li>)}</ul>
+                    <strong>Improvements to consider</strong><ul>{selectedProgress.lastReview.improvements?.map((item, index) => <li key={index}>{item}</li>)}</ul>
                     <strong>Complexity assessment</strong><p>{selectedProgress.lastReview.complexity}</p>
                   </div>}
                 </div>
