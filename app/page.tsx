@@ -129,6 +129,7 @@ useEffect(() => {
           <a href="#how-it-works" onClick={() => setMenuOpen(false)}>How it works</a>
           <a href="#toolkit" onClick={() => setMenuOpen(false)}>The toolkit</a>
           <a href="#faq" onClick={() => setMenuOpen(false)}>FAQs</a>
+          <span className="pricing-header" onClick={() => router.push("/pricing")}>Pricing</span>
            
 {isLoggedIn ? (
   <button
@@ -498,7 +499,16 @@ useEffect(() => {
           <p>Own your next move.</p>
           <a className="footer-back-top" href="#">BACK TO TOP ↑</a>
         </div>
-        <div className="footer-bottom"><span>© 2026 STRYVEXI. ALL RIGHTS RESERVED.</span><span>MADE FOR WHAT’S NEXT <i>✳</i></span><a href="mailto:hello@stryvexi.com">SAY HELLO ↗</a></div>
+        <div className="footer-bottom">
+          <span>© 2026 STRYVEXI. ALL RIGHTS RESERVED.</span>
+          <div className="footer-legal-links" aria-label="Legal and support links">
+            <a href="/contact">CONTACT US</a>
+            <a href="/terms-and-conditions">TERMS &amp; CONDITIONS</a>
+            <a href="/refund-and-cancellation">REFUNDS &amp; CANCELLATIONS</a>
+          </div>
+          <span>MADE FOR WHAT’S NEXT <i>✳</i></span>
+          <a href="mailto:contact@stryvexi.com">SAY HELLO ↗</a>
+        </div>
       </footer>
     </main>
   );
