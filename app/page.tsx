@@ -206,7 +206,7 @@ useEffect(() => {
     <div>
   <strong>Your goals. Your preparation. Your next move.</strong>
   <small>
-    Resume insights · Mock interviews · Daily challenges · Career progress
+    Resume builder & analyser · Role and topic mock interviews · 60-day career challenge
   </small>
 </div>
   </div>
@@ -307,70 +307,78 @@ useEffect(() => {
       <section className="toolkit section-pad" id="toolkit">
         <div className="section-heading">
           <div>
-            <div className="section-index">02 <span>— YOUR CAREER TOOLKIT</span></div>
-            <h2>Everything you need.<br /><em>Nothing you don’t.</em></h2>
+            <div className="section-index">02 <span>— THE STRYVEXI METHOD</span></div>
+            <h2>Three tools.<br /><em>One stronger next move.</em></h2>
           </div>
-          <p>Four focused tools. One calmer, clearer path to your next opportunity.</p>
+          <p>Build a resume that tells your story, practise for the interviews ahead, and follow a focused 60-day plan to keep moving.</p>
         </div>
-        <div className="feature-grid">
+
+        <div className="feature-grid stryvexi-pillars">
           <article className="feature-card feature-card-large">
-            <div className="feature-meta"><span>01 / GET THE STORY STRAIGHT</span><span className="feature-icon">↗</span></div>
+            <div className="feature-meta">
+              <span>01 / BUILD & IMPROVE</span>
+              <span className="feature-icon">↗</span>
+            </div>
             <div className="resume-visual">
               <div className="resume-sheet">
-                <div className="resume-head"><span className="resume-avatar">PK</span><div><b>Priya Kumar</b><small>Frontend Developer</small></div><span className="resume-score">82%</span></div>
+                <div className="resume-head">
+                  <span className="resume-avatar">PK</span>
+                  <div><b>Priya Kumar</b><small>Frontend Developer</small></div>
+                  <span className="resume-score">82%</span>
+                </div>
                 <div className="resume-rule" />
-                <span className="resume-line long" /><span className="resume-line medium" />
+                <span className="resume-line long" />
+                <span className="resume-line medium" />
                 <div className="resume-highlight"><span>✓</span> Strong React experience <b>+12</b></div>
                 <div className="resume-highlight resume-highlight-warn"><span>!</span> Add measurable impact <b>Focus</b></div>
-                <span className="resume-line medium" /><span className="resume-line short" />
+                <span className="resume-line medium" />
+                <span className="resume-line short" />
               </div>
-              <div className="resume-orbit">ROLE<br />MATCH</div>
+              <div className="resume-orbit">RESUME<br />SCORE</div>
             </div>
-            <h3>Know where you stand.</h3>
-            <p>See how your resume lines up with a role, spot the gaps, and get useful suggestions you can make your own.</p>
-            <span className="feature-foot">RESUME INTELLIGENCE</span>
+            <h3>Build a resume that gets noticed.</h3>
+            <p>Create and refine your resume, analyse how it matches a target role, identify missing skills, and get practical suggestions to strengthen your profile.</p>
+            <span className="feature-foot">RESUME BUILDER · AI ANALYSER</span>
           </article>
 
           <article className="feature-card feature-card-dark">
-            <div className="feature-meta"><span>02 / GET IN THE ROOM READY</span><span className="feature-icon">↗</span></div>
+            <div className="feature-meta">
+              <span>02 / PRACTISE & PERFORM</span>
+              <span className="feature-icon">↗</span>
+            </div>
             <div className="interview-visual">
               <div className="sound-wave">{[18, 34, 24, 46, 58, 34, 68, 44, 25, 50, 36, 18, 42, 28, 54, 30, 16].map((h, i) => <span key={i} style={{ height: `${h}px` }} />)}</div>
-              <div className="interview-question"><span>QUESTION 04</span><p>“Tell me about a time you solved a difficult problem.”</p><small>Behavioural · 02:14 elapsed</small></div>
+              <div className="interview-question">
+                <span>QUESTION 04</span>
+                <p>“How would you optimise a React application?”</p>
+                <small>AI-powered · Voice practice</small>
+              </div>
               <div className="recording-dot"><span /> PRACTICE IN PROGRESS</div>
+              <div className="interview-mode-pills">
+                <span>By Job Role</span>
+                <span>By Topic</span>
+              </div>
             </div>
-            <h3>Practise with purpose.</h3>
-            <p>Build confidence with technical, behavioural, and scenario-based questions tailored to your target role.</p>
-            <span className="feature-foot">INTERVIEW STUDIO</span>
+            <h3>Walk into interviews prepared.</h3>
+            <p>Practise interviews tailored to your target job role or focus on a specific topic or technology. Answer questions aloud and receive a detailed performance report.</p>
+            <span className="feature-foot">MOCK INTERVIEWS · ROLE & TOPIC</span>
           </article>
 
           <article className="feature-card feature-card-plan">
-            <div className="feature-meta"><span>03 / MAKE PROGRESS VISIBLE</span><span className="feature-icon">↗</span></div>
+            <div className="feature-meta">
+              <span>03 / SHOW UP EVERY DAY</span>
+              <span className="feature-icon">↗</span>
+            </div>
             <div className="plan-visual">
-              <div className="plan-header"><span>YOUR 7-DAY SPRINT</span><b>WEEK 01</b></div>
-              <div className="plan-progress"><span /></div>
-              <div className="plan-day"><span className="day-done">✓</span><div><b>Resume refresh</b><small>Monday · 15 min</small></div><em>DONE</em></div>
-              <div className="plan-day"><span className="day-done">✓</span><div><b>React practice</b><small>Tuesday · 20 min</small></div><em>DONE</em></div>
-              <div className="plan-day active-day"><span>03</span><div><b>Mock interview</b><small>Today · 25 min</small></div><em>UP NEXT</em></div>
+              <div className="plan-header"><span>YOUR 60-DAY CHALLENGE</span><b>DAY 18 / 60</b></div>
+              <div className="plan-progress"><span className="challenge-progress-fill" /></div>
+              <div className="plan-day"><span className="day-done">✓</span><div><b>Improve your resume</b><small>Day 16 · 15 min</small></div><em>DONE</em></div>
+              <div className="plan-day"><span className="day-done">✓</span><div><b>Practise technical questions</b><small>Day 17 · 20 min</small></div><em>DONE</em></div>
+              <div className="plan-day active-day"><span>18</span><div><b>Complete a mock interview</b><small>Today · 25 min</small></div><em>UP NEXT</em></div>
             </div>
-            <h3>Turn intention into action.</h3>
-            <p>A manageable preparation plan helps you focus on the right things, one realistic step at a time.</p>
-            <span className="feature-foot">CAREER ACTION PLAN</span>
-          </article>
-
-          <article className="feature-card feature-card-cream">
-            <div className="feature-meta"><span>04 / KEEP THE DETAILS TOGETHER</span><span className="feature-icon">↗</span></div>
-            <div className="tracker-visual">
-              <div className="tracker-title">APPLICATIONS <span>THIS MONTH ↗</span></div>
-              <div className="tracker-number">08 <small>roles in motion</small></div>
-              <div className="tracker-table">
-                <div><span className="company-mark mark-one">n</span><b>Northstar</b><em className="tag-applied">Applied</em></div>
-                <div><span className="company-mark mark-two">v</span><b>Verve Labs</b><em className="tag-interview">Interview</em></div>
-                <div><span className="company-mark mark-three">m</span><b>Mono Studio</b><em className="tag-saved">Saved</em></div>
-              </div>
-            </div>
-            <h3>Keep your search in sync.</h3>
-            <p>Track applications, interviews, and follow-ups in one place—without another spreadsheet spiral.</p>
-            <span className="feature-foot">APPLICATION TRACKER</span>
+            <h3>Make 60 days count.</h3>
+            <p>Follow a structured daily challenge with manageable tasks across resume improvement, technical practice, mock interviews, and job-search preparation. Track your progress one day at a time.</p>
+            <span className="feature-foot">60-DAY CAREER CHALLENGE</span>
           </article>
         </div>
       </section>
