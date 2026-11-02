@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import LoadingAnimation from "../components/LoadingAnimation";
 
 type User = {
   name?: string;
@@ -17,7 +18,7 @@ const navItems = [
   { label: "Resume Intelligence", icon: "▤", href: "/dashboard/resume" },
   { label: "Mock Interviews", icon: "◇", href: "/dashboard/mocks" },
   { label: "Daily Challenges", icon: "✳", href: "/dashboard/challenges" },
-  { label: "30-Day Career Sprint", icon: "✳", href: "/dashboard/career-sprint" },
+  { label: "60-Day Career Sprint", icon: "✳", href: "/dashboard/career-sprint" },
 ];
 
 export default function DashboardLayout({
@@ -90,9 +91,7 @@ const currentPage =
 
   if (loading) {
     return (
-      <div className="dashboard-loading">
-        <p>Loading your workspace...</p>
-      </div>
+      <LoadingAnimation />
     );
   }
   function BrandMark() {
