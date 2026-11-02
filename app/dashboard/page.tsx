@@ -180,19 +180,22 @@ return (
         <p>Your next career destination</p>
       </article>
 
-      <article className="stry-stat-card">
-        <div className="stry-stat-top">
-          <span>RESUME</span>
-          <span className="stry-stat-icon">▤</span>
-        </div>
-        <strong className="stry-stat-role">
-          {user.resume?.originalName ? "Uploaded" : "Not uploaded"}
-        </strong>
-        <p>
-          {user.resume?.originalName ||
-            "Add your resume to get started"}
-        </p>
-      </article>
+      <article
+  className="stry-stat-card"
+  onClick={() => router.push("/dashboard/resume-builder")}
+  style={{ cursor: "pointer" }}
+>
+  <div className="stry-stat-top">
+    <span>RESUME BUILDER</span>
+    <span className="stry-stat-icon">▤</span>
+  </div>
+
+  <strong className="stry-stat-role">
+    Build your resume
+  </strong>
+
+  <p>Create, customize and download your professional resume.</p>
+</article>
     </section>
 
     <section className="stry-grid">

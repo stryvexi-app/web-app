@@ -13,10 +13,11 @@ type User = {
 const navItems = [
   { label: "Overview", icon: "◫", href: "/dashboard" },
   { label: "My Career Profile", icon: "◎", href: "/dashboard/profile" },
+  { label: "Resume Builder", icon: "▤", href: "/dashboard/resume-builder" },
   { label: "Resume Intelligence", icon: "▤", href: "/dashboard/resume" },
   { label: "Mock Interviews", icon: "◇", href: "/dashboard/mocks" },
   { label: "Daily Challenges", icon: "✳", href: "/dashboard/challenges" },
-  { label: "My Progress", icon: "↗", href: "/dashboard/progress" },
+  { label: "30-Day Career Sprint", icon: "✳", href: "/dashboard/career-sprint" },
 ];
 
 export default function DashboardLayout({
@@ -29,13 +30,12 @@ export default function DashboardLayout({
 
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const currentPage =
-    navItems.find((item) =>
-      item.href === "/dashboard"
-        ? pathname === "/dashboard"
-        : pathname.startsWith(item.href)
-    ) ?? navItems[0];
+  const isActiveRoute = (href: string) =>
+  href === "/dashboard"
+    ? pathname === href
+    : pathname === href || pathname.startsWith(`${href}/`);
+const currentPage =
+  navItems.find((item) => isActiveRoute(item.href)) ?? navItems[0];
 
   useEffect(() => {
     let cancelled = false;
@@ -126,24 +126,21 @@ export default function DashboardLayout({
         <div className="stry-sidebar-caption">WORKSPACE</div>
 
         <nav className="stry-nav">
-          {navItems.map((item) => {
-            const active =
-              item.href === "/dashboard"
-                ? pathname === "/dashboard"
-                : pathname.startsWith(item.href);
+        {navItems.map((item) => {
+  const active = isActiveRoute(item.href);
 
-            return (
-              <button
-                key={item.href}
-                type="button"
-                className={`stry-nav-item${active ? " active" : ""}`}
-                onClick={() => router.push(item.href)}
-              >
-                <span className="stry-nav-icon">{item.icon}</span>
-                <span>{item.label}</span>
-              </button>
-            );
-          })}
+  return (
+    <button
+      key={item.href}
+      type="button"
+      className={`stry-nav-item${active ? " active" : ""}`}
+      onClick={() => router.push(item.href)}
+    >
+      <span className="stry-nav-icon">{item.icon}</span>
+      <span>{item.label}</span>
+    </button>
+  );
+})}
         </nav>
 
         <div className="stry-sidebar-bottom">

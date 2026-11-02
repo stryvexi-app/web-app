@@ -9,6 +9,9 @@ import LoadingAnimation from "@/app/components/LoadingAnimation";
 
 type InterviewSession = {
   id: string;
+  mode?: "role" | "topic";
+  topic?: string;
+  subtopic?: string;
   targetRole: string;
   experienceLevel: string;
   interviewType: string;
@@ -42,6 +45,9 @@ type MainTab = "practice" | "history";
 
 type HistoryItem = {
   id: string;
+  mode?: "role" | "topic";
+  topic?: string;
+  subtopic?: string;
   targetRole: string;
   experienceLevel: string;
   interviewType: string;
@@ -65,6 +71,9 @@ type Question = {
 };
 
 export default function MockInterviewPage() {
+  const [mode, setMode] = useState<"role" | "topic">("role");
+  const [topic, setTopic] = useState("JavaScript");
+  const [subtopic, setSubtopic] = useState("");
   const [targetRole, setTargetRole] = useState("");
   const [experienceLevel, setExperienceLevel] = useState("1–3 years");
   const [interviewType, setInterviewType] = useState("Mixed");
@@ -118,8 +127,12 @@ export default function MockInterviewPage() {
     setError("");
     setNotice("");
 
-    if (!targetRole.trim()) {
+    if (mode === "role" && !targetRole.trim()) {
       setError("Enter the role you want to practice for.");
+      return;
+    }
+    if (mode === "topic" && !topic.trim()) {
+      setError("Select a topic to practice.");
       return;
     }
 
@@ -130,7 +143,10 @@ export default function MockInterviewPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            targetRole: targetRole.trim(),
+            mode,
+            targetRole: mode === "role" ? targetRole.trim() : "",
+            topic: mode === "topic" ? topic : "",
+            subtopic: mode === "topic" ? subtopic.trim() : "",
             experienceLevel,
             interviewType,
             difficulty,
@@ -447,6 +463,12 @@ async function submitAnswer() {
             </div>
 
             <form onSubmit={startInterview}>
+              <div className="mock-mode-selector" role="group" aria-label="Interview mode">
+                <button type="button" className={mode === "role" ? "active" : ""} onClick={() => setMode("role")}>By Job Role</button>
+                <button type="button" className={mode === "topic" ? "active" : ""} onClick={() => setMode("topic")}>By Topic</button>
+              </div>
+
+              {mode === "role" ? (
               <label className="mock-field mock-field-full">
                 <span>Target job role <b>*</b></span>
                 <input
@@ -457,8 +479,23 @@ async function submitAnswer() {
                   required
                 />
               </label>
+              ) : (
+                <div className="mock-form-grid">
+                  <label className="mock-field">
+                    <span>Topic <b>*</b></span>
+                    <select value={topic} onChange={(e) => setTopic(e.target.value)}>
+                      { ["JavaScript", "React.js", "Next.js", "Node.js", "Express.js", "NestJS", "TypeScript", "HTML & CSS", "Python", "Java", "SQL & Databases", "MongoDB", "PostgreSQL", "AWS", "System Design", "Data Structures & Algorithms"].map((value) => <option key={value}>{value}</option>) }
+                    </select>
+                  </label>
+                  <label className="mock-field">
+                    <span>Subtopic (optional)</span>
+                    <input value={subtopic} onChange={(e) => setSubtopic(e.target.value)} placeholder="e.g. React Hooks" maxLength={100} />
+                  </label>
+                </div>
+              )}
 
               <div className="mock-form-grid">
+                {mode === "role" && <>
                 <label className="mock-field">
                   <span>Experience level</span>
                   <select value={experienceLevel} onChange={(e) => setExperienceLevel(e.target.value)}>
@@ -479,6 +516,7 @@ async function submitAnswer() {
                     <option>HR</option>
                   </select>
                 </label>
+                </>}
 
                 <label className="mock-field">
                   <span>Difficulty</span>
@@ -584,7 +622,7 @@ async function submitAnswer() {
                       </div>
                       <h3>{item.targetRole || "Mock interview"}</h3>
                       <p className="mock-history-meta">
-                        {item.interviewType} · {item.difficulty} · {item.experienceLevel}
+                        {item.mode === "topic" ? "Topic practice" : item.interviewType} · {item.difficulty} · {item.experienceLevel}
                       </p>
                       <div className="mock-history-card-bottom">
                         <div className="mock-history-stat">
@@ -625,9 +663,9 @@ async function submitAnswer() {
 
               <div className="mock-history-detail-heading">
                 <span className="mock-pill">PAST INTERVIEW REVIEW</span>
-                <h2>{selectedHistory.targetRole}</h2>
+                <h2>{selectedHistory.mode === "topic" ? `${selectedHistory.topic || "Topic practice"}${selectedHistory.subtopic ? ` · ${selectedHistory.subtopic}` : ""}` : selectedHistory.targetRole}</h2>
                 <p>
-                  {selectedHistory.interviewType} · {selectedHistory.difficulty} ·{" "}
+                  {selectedHistory.mode === "topic" ? "Topic practice" : selectedHistory.interviewType} · {selectedHistory.difficulty} ·{" "}
                   {selectedHistory.experienceLevel}
                 </p>
               </div>
@@ -734,8 +772,8 @@ async function submitAnswer() {
           <div className="mock-room-top">
             <div>
               <span className="mock-eyebrow">LIVE PRACTICE SESSION</span>
-              <h2>{session.targetRole}</h2>
-              <p>{session.interviewType} interview · {session.difficulty}</p>
+              <h2>{session.mode === "topic" ? `${session.topic || "Topic practice"}${session.subtopic ? ` · ${session.subtopic}` : ""}` : session.targetRole}</h2>
+              <p>{session.mode === "topic" ? "Topic practice" : `${session.interviewType} interview`} · {session.difficulty}</p>
             </div>
             <span className="mock-session-badge">● IN PROGRESS</span>
           </div>
